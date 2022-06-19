@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="detail-box">
+        <div class="img"><img src="<%= details.img %> " alt=""></div>
+        <div class="username">
+            <h1>username:</h1>
+            <%= details.nickname %>
+        </div>
+        <div class="comment-text">
+            <h1>comment:</h1>
+            <%= details.comment %> 
+        </div>
+        <div class="buttons">
+            <form action="/" method="get">
+                <button class="back">back</button>
+            </form>
+            <button class="edit">edit</button>
+            <form action="/deleteComment/<%= details._id %>?_method=DELETE" method="post">
+                <button class="remove">remove</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

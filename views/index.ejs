@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments system</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="fontello/css/fontello-embedded.css">
+    <script defer src="animation.js"></script>
+</head>
+<body>
+    <div class="box">
+        <div class="new">
+            <form action="/newcomment" method="post">
+                <div class="top-input">
+                    <div class="input-style-user">
+                        <input type="text" name="nickname" id="username" placeholder="Username">
+                    </div>
+                    <label for="img" class="label-img">Avatar:</label>
+                    <input type="file" name="avatar" id="img">
+                </div>
+                <div class="input-style">
+                    <textarea name="comment" rows="1" class="comment-input" placeholder="Write new comment"></textarea>
+                </div>
+                <button id="comment-add-button">add</button>
+            </form>
+        </div>
+        <div class="comments">
+            <% for(let comment of comments) {%> 
+                <input type="text" name="id" value="<%= comment._id %>" hidden class="personal-id">
+                <div class="comment-box">
+                    <div class="avatar">
+                        <img src='<%= comment.img %>' alt="">
+                        <%= comment.nickname %>
+                    </div>
+                    <div class="comment">
+                        <%= comment.comment %>
+                    </div>
+                    <button class="comment-edit">
+                        <i class="icon-edit"></i>
+                    </button>
+                    <form action="/deleteComment/<%= comment._id %>?_method=DELETE" method="post">
+                        <button class="comment-delete">
+                            <i class="icon-trash-empty"></i>
+                        </button>
+                    </form>
+                    <form action="/<%= comment._id %>" method="get">
+                        <button class="comment-read">
+                            <i class="icon-trash-empty"></i>
+                        </button>
+                    </form>
+                </div>
+            <% } %> 
+        </div>
+    </div>
+    <template class="edit-form">
+        <form action="/editComment?_method=PATCH" method="post" id="uniq">
+            <div class="input-style-edit">
+                <textarea name="comment" cols="1" rows="1" class="comment-input-edit"></textarea>
+                <button class="edit-form-btn">edit</button>
+            </div>
+        </form>
+    </template>
+</body>
+</html>
